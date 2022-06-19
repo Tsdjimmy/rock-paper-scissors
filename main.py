@@ -1,41 +1,71 @@
-# Write your solution below the starter code
-# Follow the instructions in the tab to the right
-
+import time
+import sys
 import random
 
-# Welcome the user to the game
-print("Welcome to rock, paper, scissors. Good luck!")
 
-print("Enter your choice")
-# Make a choice for the computer player
-user_choice = input("P, R, Scissors? ")
 
-computer_choice = "Rock", "Paper", "Scissors"
-com_choice = random.choice(computer_choice)
+print("Welcome to Rock Paper Scissors!")
+print("-------------------------------")
 
-print(com_choice)
-# Get a choice from the user
-# Compare the user and computer choice
-# Print the right message, based on the choices
-#Rock smashes Scissors
-#Paper covers Rock
-#Scissors cuts Paper
-if (user_choice == "Paper" and com_choice == "Rock"):
-  print("Paper covers Rock. You win!")
-elif (user_choice == "Rock" and com_choice == "Paper"):
-  print("Paper covers Rock. You Lose!")
-# else:
-  # print("You draw")
-    
-if (user_choice == "Scissors" and com_choice == "Rock"):
-  print("Rock smashes Scissors. You lose!")
-elif (user_choice == "Rock" and com_choice == "Scissors"):
-  print("Rock smashes scissors. You Win!")
-if (user_choice == "Paper" and com_choice == "Scissors"):
-  print("Scissors cut paper. You Lose!")
-elif(user_choice == "Scissors" and com_choice == "Paper"):
-  print("Scissors cut paper, You Win!")
 
-if(user_choice == com_choice):
-  print("Computer chose " + com_choice + " You draw!")
+def win():
+    print('THE GAME: You win')
+def lost():
+    print('THE GAME: You lost')
+def tie():
+    print('THE GAME: Its a tie')
+  
+def the_game():
+    moves = ['r', 'p', 's']
+    print('Choose one: R, P, S?')
+    attempts = 3
+    while True:
+        if attempts == 0:
+            print('THE GAME: You failed to provide a correct option')
+            time.sleep(5)
+            sys.exit(0)
 
+        player = str(input('Player:')).lower()
+        if player.lower() not in moves:
+            print(f'THE GAME: Invalid option! You have {attempts} attempts left')
+            attempts -= 1
+        else:
+            computer =random.choice(moves)
+            print(f'Computer: {computer}')
+
+            if player == computer:
+                tie()
+            elif player == "r" and computer == "p":
+                lost()
+            elif player == "r" and computer == "s":
+                win()
+            elif player == "s" and computer == "p":
+                win()
+            elif player == "s" and computer == "r":
+                lost()
+            elif player == "p" and computer == "r":
+                win()
+            elif player == "p" and computer == "s":
+                lost()
+            else:
+                pass
+
+
+            #game loop
+            play_again = str(input('THE GAME: Retry? (y/n:)'))
+            if play_again.lower() == 'y':
+                the_game
+            elif play_again.lower() =='n':
+                print('THE GAME: Game Over. Goodbye.')
+                time.sleep(3)
+                sys.exit(0)
+            else:
+                print('THE GAME: Invalid Option. Goodbye')
+                time.sleep(2.5)
+                sys.exit(0)
+
+
+
+
+if __name__=='__main__':
+    the_game()
